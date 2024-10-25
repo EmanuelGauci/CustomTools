@@ -1,0 +1,11 @@
+string $userInput = `promptDialog -title "Rename Objects" -message "Enter the new name:" -button "OK" -button "Cancel" -defaultButton "OK" -cancelButton "Cancel" -dismissString "Cancel"`;
+ 
+if ($userInput == "OK") {//run script once the user presses ok
+      string $newName = `promptDialog -query -text`;
+      string $selectedObjects[] = `ls -selection`; // Get selected objects
+ 
+      for ($i = 0; $i < size($selectedObjects); $i++) { // Iterate through selected objects and rename
+        string $newObjectName = $newName + ($i + 1);
+        rename $selectedObjects[$i] $newObjectName;
+      }
+}
